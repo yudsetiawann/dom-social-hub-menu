@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050505;
+  --foreground: #ffffff;
+}
+
+@theme inline {
+  --color-dom-black: #050505;
+  --color-dom-darker: #000000;
+  --color-dom-red: #e61919; /* Merah neon dari menu */
+  --color-dom-red-dim: rgba(230, 25, 25, 0.2);
+  
+  --font-sans: var(--font-space), sans-serif;
+  --font-mono: var(--font-mono), monospace;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  background-image: 
+    radial-gradient(circle at 50% 50%, var(--color-dom-red-dim) 0%, transparent 50%),
+    linear-gradient(rgba(230, 25, 25, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(230, 25, 25, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 30px 30px, 30px 30px; /* Efek grid sci-fi tipis */
+}
