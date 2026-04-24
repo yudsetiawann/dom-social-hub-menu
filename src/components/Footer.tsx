@@ -1,13 +1,21 @@
+import Image from "next/image"; // 1. Import komponen Image
+
 export default function Footer() {
   return (
     <footer className="bg-dom-black border-t-2 border-dom-red py-8">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
         {/* Logo/Brand */}
         <div className="flex flex-col items-center md:items-start">
-          <span className="font-bold text-4xl tracking-tighter text-dom-red leading-none">
-            DSH.
-          </span>
-          <span className="text-[8px] tracking-[0.3em] font-mono text-white/40 mt-1 uppercase">
+          {/* 2. Ganti teks DSH. dengan komponen Image */}
+          <Image
+            src="/images/dom.png" // Path yang sudah benar
+            alt="DOM Social Hub Logo"
+            width={120} // Sesuaikan ukurannya jika ingin lebih besar di footer
+            height={50}
+            className="object-contain mb-2" // Margin bawah agar tidak terlalu menempel dengan teks copyright
+          />
+
+          <span className="text-[8px] tracking-[0.3em] font-mono text-white/40 mt-1 uppercase text-center md:text-left">
             Copyright © DOM SOCIAL HUB. <br /> All Rights Reserved.
           </span>
         </div>

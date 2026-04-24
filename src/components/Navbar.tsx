@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image"; // 1. Import komponen Image dari Next.js
 
 export default function Navbar() {
   return (
@@ -7,14 +8,17 @@ export default function Navbar() {
         {/* Dekorasi Sudut Kiri Atas */}
         <div className="absolute top-0 left-0 w-8 h-8 border-l-4 border-t-4 border-dom-red -translate-x-1 -translate-y-1"></div>
 
-        {/* Logo */}
-        <Link href="/" className="flex flex-col">
-          <span className="font-bold text-3xl tracking-tighter text-dom-red">
-            DSH.
-          </span>
-          <span className="text-[10px] tracking-[0.2em] font-mono text-white/50">
-            DOM SOCIAL HUB
-          </span>
+        {/* Logo Gambar */}
+        <Link href="/" className="flex items-center">
+          {/* 2. Gunakan tag Image untuk merender foto/logo */}
+          <Image
+            src="/images/dom.png" // Ganti dengan nama file gambar Anda
+            alt="DOM Social Hub Logo"
+            width={120} // Sesuaikan lebar gambar
+            height={50} // Sesuaikan tinggi gambar
+            className="object-contain" // Menjaga rasio gambar agar tidak gepeng
+            priority // Memprioritaskan loading logo (opsional tapi disarankan untuk LCP)
+          />
         </Link>
 
         {/* Desktop Menu */}
