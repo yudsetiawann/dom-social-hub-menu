@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -37,12 +38,16 @@ export default function Hero() {
           </p>
 
           <div className="mt-8 flex gap-4">
-            <button className="relative px-8 py-4 bg-transparent text-white font-mono uppercase tracking-widest text-sm group overflow-hidden border border-dom-red">
+            {/* Ubah tag button menjadi Link dan tambahkan href */}
+            <Link
+              href="#menu"
+              className="relative px-8 py-4 bg-transparent text-white font-mono uppercase tracking-widest text-sm group overflow-hidden border border-dom-red text-center"
+            >
               <span className="absolute inset-0 bg-dom-red -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
               <span className="relative z-10 group-hover:text-black font-bold">
                 Access_Menu
               </span>
-            </button>
+            </Link>
           </div>
         </motion.div>
 
