@@ -376,25 +376,22 @@ const menuCategories = [
 ];
 
 export default function Menu() {
-  // State menyimpan ID item yang sedang dibuka (format: "catIndex-itemIndex")
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
-
-  const toggleItem = (id: string) => {
-    // Jika diklik item yang sama, maka tutup. Jika beda, buka yang baru.
+  const toggleItem = (id: string) =>
     setExpandedItem(expandedItem === id ? null : id);
-  };
 
   return (
     <section
       id="menu"
-      className="relative min-h-screen bg-dom-black py-24 border-t border-dom-red/20 overflow-hidden"
+      className="relative min-h-screen bg-theme-bg py-24 border-t border-theme-accent/10 overflow-hidden font-sans transition-colors duration-500"
     >
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="mb-16 border-l-4 border-dom-red pl-6">
-          <h2 className="text-3xl md:text-5xl font-bold text-dom-red uppercase tracking-widest font-sans">
-            System_Directory <br /> <span className="text-white">/ Menu</span>
+        <div className="mb-16 border-l-4 border-theme-accent pl-6">
+          <h2 className="text-3xl md:text-5xl font-black text-theme-text uppercase tracking-widest">
+            System_Directory <br />{" "}
+            <span className="text-theme-accent">/ Menu</span>
           </h2>
-          <p className="font-mono text-xs text-white/40 mt-2">
+          <p className="font-mono text-xs text-theme-text/40 mt-2">
             // TAP ON ITEMS TO EXTRACT DATA
           </p>
         </div>
@@ -402,7 +399,7 @@ export default function Menu() {
         <div className="grid md:grid-cols-2 gap-x-16 gap-y-16">
           {menuCategories.map((category, catIdx) => (
             <div key={catIdx} className="relative group">
-              <h3 className="text-2xl font-bold text-dom-red uppercase tracking-widest mb-4 font-sans border-b border-dom-red/20 pb-2">
+              <h3 className="text-2xl font-black text-theme-accent uppercase tracking-widest mb-4 border-b-2 border-theme-accent/20 pb-2">
                 {category.title}
               </h3>
 
@@ -414,72 +411,71 @@ export default function Menu() {
                   return (
                     <li
                       key={itemIdx}
-                      className="border-b border-white/5 py-3 flex flex-col"
+                      className="border-b border-theme-text/10 py-3 flex flex-col"
                     >
-                      {/* Header Item (Clickable) */}
                       <button
                         onClick={() => toggleItem(itemId)}
-                        className="flex justify-between items-center w-full text-left group/item focus:outline-none"
+                        className="flex justify-between items-center w-full group/item focus:outline-none"
                       >
                         <div className="flex items-center gap-2">
+                          {/* <span
+                            className={`text-sm md:text-base uppercase font-bold transition-all ${
+                              isExpanded
+                                ? "text-theme-text scale-105"
+                                : "text-theme-text/70 group-hover/item:text-theme-text"
+                            }`}
+                          >
+                            {isExpanded ? "> " : ""}
+                            {item.name}
+                          </span> */}
+
                           <span
                             className={`text-sm md:text-base font-sans uppercase font-bold transition-colors ${
                               isExpanded
-                                ? "text-dom-red"
-                                : "text-white/80 group-hover/item:text-white"
+                                ? "text-theme-text scale-105"
+                                : "text-theme-text/70 group-hover/item:text-theme-text"
                             }`}
                           >
                             {isExpanded ? "> " : ""}
                             {item.name}
                           </span>
                           {item.signature && (
-                            <span className="text-dom-red text-lg leading-none animate-pulse">
+                            <span className="text-theme-text scale-105 text-lg leading-none animate-pulse">
                               *
                             </span>
                           )}
                         </div>
-
-                        <div className="flex items-center gap-4">
-                          <span className="font-mono text-sm font-bold text-white/80 group-hover/item:text-white">
+                        <div className="flex items-center gap-4 text-theme-text">
+                          <span className="font-mono text-sm font-bold">
                             {item.price}
                           </span>
-                          {/* Indikator buka/tutup */}
-                          <span className="text-dom-red font-mono text-xs w-4 text-right">
+                          <span className="font-mono text-xs text-theme-accent">
                             {isExpanded ? "[-]" : "[+]"}
                           </span>
                         </div>
                       </button>
 
-                      {/* Konten Accordion (Expandable) */}
                       <AnimatePresence>
                         {isExpanded && (
                           <motion.div
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3, ease: "easeInOut" }}
                             className="overflow-hidden"
                           >
-                            <div className="mt-4 p-4 border border-dom-red/30 bg-dom-red/2 flex flex-col sm:flex-row gap-4 relative">
-                              {/* Aksen UI Scanner */}
-                              <div className="absolute top-0 left-0 w-full h-px bg-dom-red opacity-50"></div>
-
-                              <div className="w-full sm:w-1/3 h-32 shrink-0 border border-dom-red/20 relative overflow-hidden">
+                            <div className="mt-4 p-4 border-2 border-theme-accent bg-theme-accent/5 flex flex-col sm:flex-row gap-4 relative">
+                              <div className="w-full sm:w-1/3 h-32 shrink-0 border border-theme-accent/20 overflow-hidden bg-black">
                                 <img
                                   src={item.image_url}
                                   alt={item.name}
-                                  className="w-full h-full object-cover filter contrast-125 saturate-50 sepia-[.3] hue-rotate-[-30deg]"
+                                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                                 />
-                                <div className="absolute bottom-1 right-1 bg-dom-black/80 text-dom-red text-[8px] font-mono px-1">
-                                  VISUAL_DB
-                                </div>
                               </div>
-
                               <div className="flex flex-col justify-center">
-                                <p className="font-mono text-xs text-dom-red/70 mb-2 uppercase">
-                                  // Data_Extraction_Complete
+                                <p className="font-mono text-[10px] text-theme-accent mb-2">
+                                  // DATA_EXTRACTED
                                 </p>
-                                <p className="text-sm text-white/70 font-sans leading-relaxed">
+                                <p className="text-sm font-medium leading-relaxed text-theme-text/80">
                                   {item.desc}
                                 </p>
                               </div>

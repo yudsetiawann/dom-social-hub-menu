@@ -1,33 +1,29 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
+import ThemeProvider from "@/src/components/ThemeProvider"; // Pastikan path import benar
 
-const spaceGrotesk = Space_Grotesk({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-space",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-montserrat",
+  weight: ["400", "500", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
-  title: "DOM Social Hub | Haven For The Reckless",
+  title: "DOM Social Hub | The Scene",
   description: "Cultivating the scene. Coffee, Mocktails, and Main Courses.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="id">
+    // SupressHydrationWarning wajib ditambahkan jika pakai next-themes
+    <html lang="id" suppressHydrationWarning>
       <body
-        className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} bg-dom-black text-white antialiased selection:bg-dom-red selection:text-black`}
+        className={`${montserrat.variable} bg-theme-bg text-theme-text antialiased selection:bg-theme-accent selection:text-theme-bg font-sans`}
       >
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
